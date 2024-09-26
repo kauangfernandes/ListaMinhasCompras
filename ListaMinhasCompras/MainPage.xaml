@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ListaMinhasCompras.MainPage">
 
@@ -21,28 +21,27 @@
             <SearchBar x:Name="txt_search" Margin="10" Placeholder="Buscar de produtos" TextChanged="txt_search_TextChanged" />
 
             <ListView x:Name="lst_produtos" ItemSelected="lst_produtos_ItemSelected">
-                
+
                 <ListView.Header>
                     <Grid ColumnDefinitions="3*, *, *, *">
-                        <Label Grid.Column="0" Text="Produto" FontAttributes="Bold" />
-                        <Label Grid.Column="1" Text="Qtd" FontAttributes="Bold" />
-                        <Label Grid.Column="2" Text="Preço" FontAttributes="Bold" />
-                        <Label Grid.Column="3" Text="Total" FontAttributes="Bold" />
+                        <Label Grid.Column="0" Text="Produto" />
+                        <Label Grid.Column="1" Text="Qnt" />
+                        <Label Grid.Column="2" Text="Preço" />
+                        <Label Grid.Column="3" Text="Total" />
                     </Grid>
                 </ListView.Header>
-                
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Remover" Clicked="MenuItem_Clicked" />
                             </ViewCell.ContextActions>
-
-                            <Grid RowDefinitions="Auto" ColumnDefinitions="3*, *, *, *">
-                                <Label Grid.Column="0" Text="{Binding Descricao}" />
-                                <Label Grid.Column="1" Text="{Binding Quantidade}" />
-                                <Label Grid.Column="2" Text="{Binding Preco, StringFormat='{}{0:c}'}" />
-                                <Label Grid.Column="2" Text="{Binding Total, StringFormat='{}{0:c}'}" />
+                            <Grid ColumnDefinitions="3*, *, *, *">
+                                <Label Grid.Row="0" Grid.Column="0" Text="{Binding Descricao}" />
+                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding Quantidade}" />
+                                <Label Grid.Row="0" Grid.Column="2" Text="{Binding Preco, StringFormat='{}{0:c}'}" />
+                                <Label Grid.Row="0" Grid.Column="3" Text="{Binding Total, StringFormat='{}{0:c}'}" />
                             </Grid>
                         </ViewCell>
                     </DataTemplate>
@@ -52,5 +51,4 @@
     </ContentPage.Content>
     
     
-
 </ContentPage>

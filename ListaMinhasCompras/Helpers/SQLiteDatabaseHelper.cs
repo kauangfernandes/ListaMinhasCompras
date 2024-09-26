@@ -8,17 +8,29 @@ using SQLite;
 
 namespace ListaMinhasCompras.Helpers
 {
+    /*
+         * Criando a classe SQLiterDatabaseHelper
+         * Classe reponsavel pelas as operacoes sql (CRUD)
+    */
     public class SQLiteDatabaseHelper
     {
+        //Habilita uma conexão com o banco de dados.
         readonly SQLiteAsyncConnection _conn;
 
 
+        //Iniciar a conexão com o banco no construtor
         public SQLiteDatabaseHelper(string path)
-        {  
+        {
+            //Path e o caminho do arquivo sqlite
+            /*
+             *  Cria um objeto e passa como parametro o arquivo/conexão com o banco de dados.
+            */
             _conn = new SQLiteAsyncConnection(path);
+            
             _conn.CreateTableAsync<Produto>().Wait();
         }
 
+        //Metodos de manipulação de dados recebem o produto como parametros
         public Task<int> Insert(Produto p)
         {
             return _conn.InsertAsync(p);

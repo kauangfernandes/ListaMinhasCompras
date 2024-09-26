@@ -5,8 +5,10 @@ namespace ListaMinhasCompras
 {
     public partial class MainPage : ContentPage
     {
+        //Cria um objeto do tipo produto e busca os set na variavel.
         ObservableCollection<Produto> lista_produtos = new ObservableCollection<Produto>();
 
+        //Metodo a ser chamado na renderização da pagina.
         public MainPage()
         {
             InitializeComponent();
@@ -15,13 +17,19 @@ namespace ListaMinhasCompras
 
         private void ToolbarItem_Clicked_somar(object sender, EventArgs e)
         {
-            double soma = lista_produtos.Sum(i => i.Total);
-            string msg = $"Total dos produtos é {soma:C}";
-            DisplayAlert("Resultado", msg, "Fechar");
+            /*
+             * Metodo a ser chamado quando clicado, pega a lista de objetos Produto.
+             * A função pecorrer a lista, aecessadno os campos e realizando operações de multiplicação.
+             * Ao final exibi a menssagen e exibe.
+            */
+            double soma = lista_produtos.Sum(i => (i.Preco * i.Quantidade));
+            string msg = $"O total é {soma:C}";
+            DisplayAlert("Somatória", msg, "Fechar");
         }
 
         private async void ToolbarItem_Clicked_add(object sender, EventArgs e)
         {
+            //Ao clicar no botão o usuário e direcionando para a view.
             await Navigation.PushAsync(new Views.NovoProduto());
         }
 
@@ -37,6 +45,7 @@ namespace ListaMinhasCompras
             }
         }
 
+        //Metodo para bucar produtos
         private async void txt_search_TextChanged(object sender, TextChangedEventArgs e)
         {
             string q = e.NewTextValue;
@@ -49,6 +58,7 @@ namespace ListaMinhasCompras
             }
         }
 
+        //Listar produto selecionado e direcionado para editar o perfil
         private void lst_produtos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Produto? p = e.SelectedItem as Produto;
@@ -65,7 +75,7 @@ namespace ListaMinhasCompras
                 MenuItem selecionado = (MenuItem)sender;
                 Produto p =  selecionado.BindingContext as Produto;
 
-                bool comfirm = await DisplayAlert("TEm certeza?", "Remover Produto?", "Sim", "Não");
+                bool comfirm = await DisplayAlert("Tem certeza?", "Remover Produto?", "Sim", "Não");
 
                 if (comfirm) {
                     await App.Database.Delete(p.Id);
